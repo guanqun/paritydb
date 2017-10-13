@@ -41,9 +41,13 @@ macro_rules! on_body_slice {
 /// A view onto multiple consecutive fields
 #[derive(Debug)]
 pub struct FieldsView<'a> {
+	/// The underlying data, headers included.
 	data: &'a [u8],
+	/// Field body size only, header size excluded.
 	field_body_size: usize,
+	/// Offset in the body space, headers excluded.
 	offset: usize,
+	/// Total length of the data, headers excluded.
 	len: usize,
 }
 
@@ -190,9 +194,14 @@ impl<'a> FieldsView<'a> {
 
 #[derive(Debug)]
 pub struct Bytes<'a> {
+	/// The underlying data, headers included.
 	data: &'a [u8],
+	/// Field body size only, header size excluded.
 	field_body_size: usize,
+	/// The offset in `data`, headers included,
+	/// but it will skip the header during iteration.
 	offset: usize,
+	/// Total length of the data, headers excluded.
 	len: usize,
 }
 
